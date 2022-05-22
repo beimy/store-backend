@@ -14,13 +14,15 @@
 
   [License Info](#License)
 
-  
+
   
 
 
   ## Description
   
   This application sets up a backend meant for an online storefront. Users can use the api endpoints to read, write, update, andelete data from a MySQL database, via an express server making use of the sequelize package.
+  
+  [![Watch the video](https://watch.screencastify.com/v/8pI8Zx5djdWERAICzJ6x)](https://watch.screencastify.com/v/8pI8Zx5djdWERAICzJ6x)
 
   ## Installation Instructions
   
