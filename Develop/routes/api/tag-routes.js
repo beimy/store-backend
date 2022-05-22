@@ -9,6 +9,12 @@ router.get('/', (req, res) => {
     attributes: [
       'id',
       'tag_name'
+    ],
+    include: [
+      {
+        model: Product,
+        attributes: [ 'id', 'product_name', 'stock']
+      }
     ]
   })
   .then(dbTagData => res.json(dbTagData))
@@ -16,7 +22,6 @@ router.get('/', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   });
-  // be sure to include its associated Product data
 });
 
   // GET a single tag by its `id`
@@ -24,7 +29,13 @@ router.get('/:id', (req, res) => {
   Tag.findOne({
     where: {
       id: req.params.id
-    }
+    },
+    include: [
+      {
+        model: Product,
+        attributes: [ 'id', 'product_name', 'stock']
+      }
+    ]
   })
   .then(dbTagData => {
     if(!dbTagData) {
@@ -37,10 +48,9 @@ router.get('/:id', (req, res) => {
     console.log(err);
     res.status(500).json(err);
   })
-  // be sure to include its associated Product data
 });
 
-  // POST a new tag
+// POST a new tag
 router.post('/', (req, res) => {
   Tag.create(req.body)
   .then(dbTagData => res.json(dbTagData))
@@ -50,7 +60,7 @@ router.post('/', (req, res) => {
   });
 });
 
-  // PUT a tag's name by its `id` value
+// PUT a tag's name by its `id` value
 router.put('/:id', (req, res) => {
   Tag.update(req.body, {
     where: {
@@ -70,7 +80,7 @@ router.put('/:id', (req, res) => {
   })
 });
 
-  // DELETE on tag by its `id` value
+// DELETE on tag by its `id` value
 router.delete('/:id', (req, res) => {
   Tag.destroy({
     where: {
